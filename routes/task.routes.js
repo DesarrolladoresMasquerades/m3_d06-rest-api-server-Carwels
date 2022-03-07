@@ -15,11 +15,12 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:taskId", (req, res) => {
-  delete req.body.project // const { title, description } = req.body
+  //delete req.body.project
+  const { title, description } = req.body
 
-  Task.findByIdAndUpdate(req.params.taskId, req.body) //{title, description}
-
-  .then((updatedTask) => res.json(updatedTask))
+  Task.findByIdAndUpdate(req.params.taskId, {title, description}, {new: true}) //{title, description}
+  .then((updatedTask) => {res.json(updatedTask)})
+  .catch((error) => {res.json(updatedTask)})
 
   // Task.findById(req.params.taskId).then((task) => {
   //   const oldProject = task.project;
