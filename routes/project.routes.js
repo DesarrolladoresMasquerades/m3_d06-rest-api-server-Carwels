@@ -31,7 +31,9 @@ router.delete("/:projectId", (req, res) => {
 router.get("/", (req, res) => {
   Project.find()
     .populate("tasks")
-    .then((projects) => res.json(projects))
+    .then((projects) => {
+      console.log("projects", projects)
+      res.json(projects)})
     .catch((error) => res.json(error));
 });
 
